@@ -50,7 +50,7 @@ public final class PageStream {
 				info_ = info.replaceAll("\n", "");
 			}
 		} catch (Exception e) {
-			log.error("获取网页内容时出现异常.",e);
+			log.error("获取网页内容时出现异常."+url,e);
 			URLUtil.staleURL.remove(URLUtil.completionUrl(url));
 		}
 		return info_;

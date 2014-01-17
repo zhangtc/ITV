@@ -51,12 +51,6 @@ public class MovieIndexSpider extends AbstractSpider {
 	 * v.360.cn/dianying
 	 */
 	public void run() {
-		List<String> list = MovieRegex.getMovieType(getPageInfo(this.url), url.substring(0, url.lastIndexOf('/')));
-		if (list != null) {
-			for (String type_url : list) {
-				//spiderPool.execute(new MoviePageSpider(type_url));
-			}
-		}
 		this.focusMap();
 		this.hotPlay();
 		this.firstPlay();
@@ -66,6 +60,12 @@ public class MovieIndexSpider extends AbstractSpider {
 		this.hotTop();
 		this.easyTop();
 		this.passionTop();
+		List<String> list = MovieRegex.getMovieType(getPageInfo(this.url), url.substring(0, url.lastIndexOf('/')));
+		if (list != null) {
+			for (String type_url : list) {
+				spiderPool.execute(new MoviePageSpider(type_url));
+			}
+		}
 	}
 	/**
 	 * 解析焦点图
@@ -82,6 +82,7 @@ public class MovieIndexSpider extends AbstractSpider {
 			mb.setId(RandomId.getRandomId());
 			mb.setType(0);
 		}
+		this.seriesUrl(list1);
 		this.movieFocusMapService.insertMovieFocusMap(list1);
 	}
 	/**
@@ -89,6 +90,7 @@ public class MovieIndexSpider extends AbstractSpider {
 	 */
 	public void hotPlay(){
 		List<MovieFocusMap> list=MovieRegex.getHotPlay(getPageInfo(this.url), getShortUrl());
+		this.seriesUrl(list);
 		this.movieFocusMapService.insertMovieFocusMap(list);
 	}
 	/**
@@ -96,6 +98,7 @@ public class MovieIndexSpider extends AbstractSpider {
 	 */
 	public void firstPlay(){
 		List<MovieFocusMap> list=MovieRegex.getFirstPlay(getPageInfo(this.url), getShortUrl());
+		this.seriesUrl(list);
 		this.movieFocusMapService.insertMovieFocusMap(list);
 	}
 	/**
@@ -103,6 +106,7 @@ public class MovieIndexSpider extends AbstractSpider {
 	 */
 	public void previewPlay(){
 		List<MovieFocusMap> list=MovieRegex.getPreviewPlay(getPageInfo(this.url), getShortUrl());
+		this.seriesUrl(list);
 		this.movieFocusMapService.insertMovieFocusMap(list);
 	}
 	/**
@@ -110,6 +114,7 @@ public class MovieIndexSpider extends AbstractSpider {
 	 */
 	public void easyPlay(){
 		List<MovieFocusMap> list=MovieRegex.getEasyPlay(getPageInfo(this.url), getShortUrl());
+		this.seriesUrl(list);
 		this.movieFocusMapService.insertMovieFocusMap(list);
 	}
 	/**
@@ -117,6 +122,7 @@ public class MovieIndexSpider extends AbstractSpider {
 	 */
 	public void passionPlay(){
 		List<MovieFocusMap> list=MovieRegex.getPassionPlay(getPageInfo(this.url), getShortUrl());
+		this.seriesUrl(list);
 		this.movieFocusMapService.insertMovieFocusMap(list);
 	}
 	/**
@@ -124,6 +130,15 @@ public class MovieIndexSpider extends AbstractSpider {
 	 */
 	public void hotTop(){
 		List<MovieFocusMap> list=MovieRegex.getHotTop(getPageInfo(this.url), getShortUrl());
+		this.seriesUrl(list);
+		this.movieFocusMapService.insertMovieFocusMap(list);
+	}
+	/**
+	 * 首播榜
+	 */
+	public void firstTop(){
+		List<MovieFocusMap> list=MovieRegex.getFirstTop(getPageInfo(this.url), getShortUrl());
+		this.seriesUrl(list);
 		this.movieFocusMapService.insertMovieFocusMap(list);
 	}
 	/**
@@ -131,6 +146,7 @@ public class MovieIndexSpider extends AbstractSpider {
 	 */
 	public void easyTop(){
 		List<MovieFocusMap> list=MovieRegex.getEasyTop(getPageInfo(this.url), getShortUrl());
+		this.seriesUrl(list);
 		this.movieFocusMapService.insertMovieFocusMap(list);
 	}
 	/**
@@ -138,7 +154,18 @@ public class MovieIndexSpider extends AbstractSpider {
 	 */
 	public void passionTop(){
 		List<MovieFocusMap> list=MovieRegex.getPassionTop(getPageInfo(this.url), getShortUrl());
+		this.seriesUrl(list);
 		this.movieFocusMapService.insertMovieFocusMap(list);
+	}
+	/**
+	 * 解析首页中的各个位置url 如：热播
+	 */
+	private void seriesUrl(List<MovieFocusMap> list){
+		if(list!=null){
+			for (int i = 0; i < list.size(); i++) {
+				spiderPool.execute(new MovieInfoSpider(list.get(i).getSupplierUrl()));
+			}
+		}
 	}
 	/**
 	 * 返回短url

@@ -22,5 +22,10 @@ public class Main {
 		MovieIndexSpider movieIndexSpider=(MovieIndexSpider)ac.getBean("movieIndexSpider");
 		AbstractSpider.spiderPool.execute(movieIndexSpider);
 		movieService.run();
+		//http://v.360.cn/m/gKPoYUX2QXf6UR.html
+		//http://v.360.cn/m/g6joYkn7QHH1SB.html
+		//http://v.360.cn/m/fqjnY0j6RHj2UB.html
+		//http://v.360.cn/m/gKTqZUcmQnX7Tx.html
+		//http://v.360.cn/m/gaLrYkEoR0jAUB.html
 	}
 }

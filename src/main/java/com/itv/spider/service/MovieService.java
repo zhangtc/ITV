@@ -31,6 +31,8 @@ public class MovieService extends AbstractSpider {
 					if(movieList.size()>0){
 						baseDao.insert("com.itv.sprider.movie.insertMovieList", movieList);
 						movieList.clear();
+					}else{
+						break;
 					}
 				}
 			} catch (InterruptedException e) {

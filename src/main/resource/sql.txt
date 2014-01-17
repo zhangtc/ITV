@@ -1,0 +1,3 @@
+create table tmp as select max(id) as col1 from movie group by supplierUrl;
+delete from movie where id not in (select col1 from tmp);
+drop table tmp;

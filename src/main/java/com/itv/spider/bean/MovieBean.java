@@ -11,6 +11,7 @@ import com.itv.spider.util.RandomId;
 public class MovieBean {
 	private String id;// 主键id
 	private String name;// 影视名称
+	private String typeName;//电影类型 喜剧
 	private String director;// 导演
 	private String actor;// 主演
 	private String area;// 地区
@@ -18,12 +19,14 @@ public class MovieBean {
 	private String duration;// 片长
 	private float value;// 评分
 	private String less;// 简介
+	//private String type;//电影类型 喜剧
 	private int ratingCount;// 评价人数
 	private String supplies;// 第三方影片资源json
 	private String imgUrl;// 图片地址
 	private String language;// 语言
 	private int suppliesCount;//第三方资源数
 	private String supplierUrl;//本网页的url
+	private String downUrl;//下载地址
 	public MovieBean() {
 		this.id = RandomId.getRandomId();
 	}
@@ -154,6 +157,22 @@ public class MovieBean {
 
 	public void setSupplierUrl(String supplierUrl) {
 		this.supplierUrl = supplierUrl;
+	}
+
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
+	public String getDownUrl() {
+		return downUrl;
+	}
+
+	public void setDownUrl(String downUrl) {
+		this.downUrl = downUrl;
 	}
 
 	public String toString() {

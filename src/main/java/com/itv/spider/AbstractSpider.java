@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import com.itv.spider.bean.MovieBean;
 import com.itv.spider.exception.ReuseUrlException;
 import com.itv.spider.httpclient.PageStream;
+import com.itv.spider.s360.movie.MovieThreadFactory;
 import com.itv.spider.xml.RegexXml;
 
 /**
@@ -27,7 +28,7 @@ public abstract class AbstractSpider implements Runnable{
 	/**
 	 * 提供爬取页面的线程池
 	 */
-	public final static ExecutorService spiderPool = Executors.newFixedThreadPool(20);
+	public final static ExecutorService spiderPool = Executors.newFixedThreadPool(20,new MovieThreadFactory());
 	private static Map<String, String> regex_map_360;
 	protected static Proxy proxy=null;
 	

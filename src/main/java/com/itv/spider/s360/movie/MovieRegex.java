@@ -213,17 +213,17 @@ public class MovieRegex {
 			regex_=regex_map.get("movie_get_supplies_info");
 			p=Pattern.compile(regex_);
 			m=p.matcher(str);
-			StringBuffer sb=new StringBuffer("{");
+			StringBuffer sb=new StringBuffer("[");
 			while(m.find()){
-				sb.append("{\"name\":");
+				sb.append("{\"name\":\"");
 				sb.append(URLUtil.decodeUnicode(m.group(1)));
-				sb.append("{\"link\":");
+				sb.append("\",\"link\":\"");
 				sb.append(m.group(2));
-				sb.append("},");
+				sb.append("\"},");
 				count++;
 			}
 			sb.replace(sb.length()-1, sb.length(), "");
-			sb.append("}");
+			sb.append("]");
 			mb.setSuppliesCountl(count);
 			return sb.toString().replaceAll("\\\\", "");
 		}else{
@@ -232,7 +232,7 @@ public class MovieRegex {
 			m=p.matcher(info);
 			while(m.find()){
 				mb.setSuppliesCountl(1);
-				return "{\"name\":"+m.group(2)+",\"link\":"+m.group(1)+"}";
+				return "{\"name\":\""+m.group(2)+"\",\"link\":\""+m.group(1)+"\"}";
 			}
 		}
 		return null;
@@ -252,6 +252,7 @@ public class MovieRegex {
 		Pattern p=Pattern.compile(regex_);
 		Matcher m=p.matcher(info);
 		List<MovieFocusMap> list=new ArrayList<MovieFocusMap>();
+		int i=0;
 		while(m.find()){
 			String videoUrl=m.group(1);
 			if(videoUrl.indexOf("http:")<0){
@@ -262,6 +263,10 @@ public class MovieRegex {
 			mfm.setSupplierUrl(videoUrl);
 			mfm.setBigImgUrl(img);
 			list.add(mfm);
+			i++;
+			if(i>=8){
+				break;
+			}
 		}
 		return list;
 	}
@@ -506,6 +511,15 @@ public class MovieRegex {
 			}
 		}
 		return list;
+	}
+	/**
+	 * 首播榜 其实是特色榜
+	 * @param info
+	 * @param url
+	 * @return
+	 */
+	public static List<MovieFocusMap> getFirstTop(String info,String url){
+		return null;
 	}
 	/**
 	 * 休闲剧场

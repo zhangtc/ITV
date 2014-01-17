@@ -1,6 +1,9 @@
 package com.itv.spider.s360.movie;
 
 import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import com.itv.spider.AbstractSpider;
 
 /**
@@ -10,10 +13,16 @@ import com.itv.spider.AbstractSpider;
  * 
  */
 public class MoviePageSpider extends AbstractSpider {
+	private final static Logger log=Logger.getLogger(MoviePageSpider.class);
 	private String url;
+	private String typeName;//电影类别 喜剧
 
 	public MoviePageSpider(String url) {
 		this.url = url;
+	}
+	public MoviePageSpider(String url,String typeName){
+		this(url);
+		this.typeName=typeName;
 	}
 
 	public void run() {
@@ -26,6 +35,7 @@ public class MoviePageSpider extends AbstractSpider {
 			if (list != null) {
 				for (String mv_url : list) {
 					spiderPool.execute(new MovieInfoSpider(mv_url));
+					//log.info("update movie set type=CONCAT_WS('|','"+typeName+"',type)  where supplierUrl='"+mv_url+"'");
 				}
 			}
 			downPage = MovieRegex.getMoviePageDownUrl(page_info);
@@ -36,7 +46,7 @@ public class MoviePageSpider extends AbstractSpider {
 	}
 
 	public static void main(String[] args) {
-		MoviePageSpider mp = new MoviePageSpider("http://v.360.cn/dianying/list.php?cat=103");
+		MoviePageSpider mp = new MoviePageSpider("http://v.360.cn/dianying/list.php?cat=101","伦理");
 		mp.run();
 	}
 }

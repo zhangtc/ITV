@@ -28,4 +28,8 @@ public class MovieInfoSpider extends AbstractSpider{
 			}
 		}
 	}
+	public static void main(String[] args) {
+		MovieInfoSpider ms=new MovieInfoSpider("http://v.360.cn/m/gKTnYkj7QXH7Sh.html");
+		ms.run();
+	}
 }
