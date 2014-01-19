@@ -4,3 +4,12 @@
 *.jar
 *.war
 *.ear
+/.idea
+/target
+*.iml
+*.jar
+*.class
+*.rar
+*.tar.gz
+*.tar
+*.zip
