@@ -54,11 +54,11 @@ public class MovieIndexSpider extends AbstractSpider {
 	 * v.360.cn/dianying
 	 */
 	public void run() {
-		//this.focusMap();
-		//this.hotPlay();
-		//this.firstPlay();
+		this.focusMap();
+		this.hotPlay();
+		this.firstPlay();
 		this.previewPlay();
-		/*this.easyPlay();
+		this.easyPlay();
 		this.passionPlay();
 		this.hotTop();
 		this.easyTop();
@@ -73,7 +73,7 @@ public class MovieIndexSpider extends AbstractSpider {
 				}
 				
 			}
-		}*/
+		}
 	}
 	/**
 	 * 解析焦点图

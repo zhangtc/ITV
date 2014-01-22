@@ -28,7 +28,7 @@ public abstract class AbstractSpider implements Runnable{
 	/**
 	 * 提供爬取页面的线程池
 	 */
-	public final static ExecutorService spiderPool = Executors.newFixedThreadPool(20);//,new MovieThreadFactory()
+	public final static ExecutorService spiderPool = Executors.newFixedThreadPool(20,new MovieThreadFactory());//,new MovieThreadFactory()
 	private static Map<String, String> regex_map_360;
 	protected static Proxy proxy=null;
 	

@@ -1,5 +1,7 @@
 package com.itv.spider;
 
+import java.util.concurrent.ThreadPoolExecutor;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -21,6 +23,6 @@ public class Main {
 	public static void main(String[] args) {
 		MovieIndexSpider movieIndexSpider=(MovieIndexSpider)ac.getBean("movieIndexSpider");
 		AbstractSpider.spiderPool.execute(movieIndexSpider);
-		//movieService.run();
+		movieService.run();
 	}
 }
