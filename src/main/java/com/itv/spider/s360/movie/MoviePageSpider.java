@@ -34,8 +34,10 @@ public class MoviePageSpider extends AbstractSpider {
 			List<String> list = MovieRegex.getMovieListUrl(page_info, url.substring(0, i));
 			if (list != null) {
 				for (String mv_url : list) {
-					spiderPool.execute(new MovieInfoSpider(mv_url));
-					//log.info("update movie set type=CONCAT_WS('|','"+typeName+"',type)  where supplierUrl='"+mv_url+"'");
+					spiderPool.execute(new MovieInfoSpider(mv_url,typeName));
+					/*if(typeName!=null){
+						log.info("update movie set typeName=CONCAT_WS('|','"+typeName+"',typeName)  where supplierUrl='"+mv_url+"';");
+					}*/
 				}
 			}
 			downPage = MovieRegex.getMoviePageDownUrl(page_info);

@@ -2,6 +2,7 @@ package com.itv.spider.s360.movie;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -33,11 +34,11 @@ public class MovieRegex {
 	 * @param url 此页面的url
 	 * @return
 	 */
-	public static List<String> getMovieType(String pageInfo,String url){
+	public static Map<String,String> getMovieType(String pageInfo,String url){
 		if(pageInfo==null||"".equals(pageInfo)){
 			return null;
 		}
-		List<String> mList=null;
+		Map<String,String> mList=null;
 		String regex_div=regex_map.get("movie_index_type_div");
 		long st=System.nanoTime();
 		Pattern p=Pattern.compile(regex_div);
@@ -46,14 +47,15 @@ public class MovieRegex {
 			String div=m.group();
 			if(div!=null&&!"".equals(div)){
 				String regex_a=regex_map.get("movie_index_type_a");
-				mList=new ArrayList<String>();
+				mList=new HashMap<String,String>();
 				url=url.lastIndexOf('/')==url.length()-1?url:(url+"/");
 				p=Pattern.compile(regex_a);
 				m= p.matcher(div);
 				while(m.find()){
 					String a=m.group(1);
+					String typeName=m.group(2);
 					if(a.indexOf("http")<0){
-						mList.add(url+a);
+						mList.put(url+a,typeName);
 					}
 				}
 			}
@@ -102,7 +104,7 @@ public class MovieRegex {
 	 * 获取视频详细信息
 	 * @param pageInfo
 	 */
-	public static MovieBean getMovieInfo(String pageInfo,String url){
+	public static MovieBean getMovieInfo(String pageInfo,String url,String typeName){
 		if(pageInfo==null){
 			return null;
 		}
@@ -173,6 +175,7 @@ public class MovieRegex {
 		mb.setActor(getActor(mb.getActor()));
 		mb.setSupplies(getSupplies(pageInfo,mb));
 		mb.setSupplierUrl(url);
+		mb.setTypeName(typeName);
 		log.debug("正则时间："+(System.nanoTime()-st)/1000000+" 毫秒.");
 		return mb;
 	}
@@ -410,6 +413,9 @@ public class MovieRegex {
 				if(url_.length()>60){
 					continue;
 				}
+				if(url_.indexOf("/")!=0&&url_.indexOf("http:")!=0){
+					url_="/"+url_;
+				}
 				url_=url_.indexOf("http:")<0?url+url_:url_;
 				mfm.setSupplierUrl(url_);
 				mfm.setMiniImgUrl(m.group(2));
@@ -579,9 +585,5 @@ public class MovieRegex {
 			}
 		}
 		return list;
-	}
-	public static void main(String[] args) throws IOException {
-		String info=FileReadUtil.readFile("d:/data/sdf.txt").replaceAll("\n", "");
-		MovieRegex.getMovieInfo(info,"");
 	}
 }

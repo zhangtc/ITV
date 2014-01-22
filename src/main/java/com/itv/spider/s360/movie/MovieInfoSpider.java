@@ -14,12 +14,14 @@ import com.itv.spider.bean.MovieBean;
 public class MovieInfoSpider extends AbstractSpider{
 	private final static Logger log=Logger.getLogger(MovieInfoSpider.class);
 	private String url;
-	public MovieInfoSpider(String url){
+	private String typeName;
+	public MovieInfoSpider(String url,String typeName){
 		this.url=url;
+		this.typeName=typeName;
 	}
 
 	public void run() {
-		MovieBean mb= MovieRegex.getMovieInfo(getPageInfo(this.url),this.url);
+		MovieBean mb= MovieRegex.getMovieInfo(getPageInfo(this.url),this.url,typeName);
 		if(mb!=null){
 			try {
 				movieQueue.put(mb);//将获取的对象放入阻塞队列
@@ -27,9 +29,5 @@ public class MovieInfoSpider extends AbstractSpider{
 				log.error("",e);
 			}
 		}
-	}
-	public static void main(String[] args) {
-		MovieInfoSpider ms=new MovieInfoSpider("http://v.360.cn/m/gKTnYkj7QXH7Sh.html");
-		ms.run();
 	}
 }

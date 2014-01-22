@@ -32,11 +32,14 @@ public class MovieService extends AbstractSpider {
 						baseDao.insert("com.itv.sprider.movie.insertMovieList", movieList);
 						movieList.clear();
 					}else{
-						break;
+						if(AbstractSpider.spiderPool.isTerminated()){
+							log.info("数据库插入队列正常退出.");
+							break;
+						}
 					}
 				}
 			} catch (InterruptedException e) {
-				log.error("",e);
+				log.error("数据库插入队列异常导致退出.",e);
 				break;
 			}
 		}

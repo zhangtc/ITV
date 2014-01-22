@@ -1,6 +1,8 @@
 package com.itv.spider.s360.movie;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
@@ -9,6 +11,7 @@ import com.itv.spider.bean.MovieFocusMap;
 import com.itv.spider.httpclient.PageStream;
 import com.itv.spider.service.MovieFocusMapService;
 import com.itv.spider.util.RandomId;
+
 
 /**
  * 解析电影首页
@@ -51,21 +54,26 @@ public class MovieIndexSpider extends AbstractSpider {
 	 * v.360.cn/dianying
 	 */
 	public void run() {
-		this.focusMap();
-		this.hotPlay();
-		this.firstPlay();
+		//this.focusMap();
+		//this.hotPlay();
+		//this.firstPlay();
 		this.previewPlay();
-		this.easyPlay();
+		/*this.easyPlay();
 		this.passionPlay();
 		this.hotTop();
 		this.easyTop();
 		this.passionTop();
-		List<String> list = MovieRegex.getMovieType(getPageInfo(this.url), url.substring(0, url.lastIndexOf('/')));
-		if (list != null) {
-			for (String type_url : list) {
-				spiderPool.execute(new MoviePageSpider(type_url));
+		Map<String,String> map = MovieRegex.getMovieType(getPageInfo(this.url), url.substring(0, url.lastIndexOf('/')));
+		if (map != null) {
+			for (Entry<String, String> type_url : map.entrySet()) {
+				if(type_url.getKey().indexOf("cat=")!=-1){
+					spiderPool.execute(new MoviePageSpider(type_url.getKey(),type_url.getValue()));
+				}else{
+					spiderPool.execute(new MoviePageSpider(type_url.getKey()));
+				}
+				
 			}
-		}
+		}*/
 	}
 	/**
 	 * 解析焦点图
@@ -163,7 +171,7 @@ public class MovieIndexSpider extends AbstractSpider {
 	private void seriesUrl(List<MovieFocusMap> list){
 		if(list!=null){
 			for (int i = 0; i < list.size(); i++) {
-				spiderPool.execute(new MovieInfoSpider(list.get(i).getSupplierUrl()));
+				spiderPool.execute(new MovieInfoSpider(list.get(i).getSupplierUrl(),null));
 			}
 		}
 	}
@@ -188,10 +196,5 @@ public class MovieIndexSpider extends AbstractSpider {
 
 	public void setMovieFocusMapService(MovieFocusMapService<MovieFocusMap> movieFocusMapService) {
 		this.movieFocusMapService = movieFocusMapService;
-	}
-
-	public static void main(String[] args) {
-		MovieIndexSpider ms=new MovieIndexSpider("http://v.360.cn/dianying/index.html");
-		ms.passionTop();
 	}
 }

@@ -28,7 +28,7 @@ public abstract class AbstractSpider implements Runnable{
 	/**
 	 * 提供爬取页面的线程池
 	 */
-	public final static ExecutorService spiderPool = Executors.newFixedThreadPool(20,new MovieThreadFactory());
+	public final static ExecutorService spiderPool = Executors.newFixedThreadPool(20);//,new MovieThreadFactory()
 	private static Map<String, String> regex_map_360;
 	protected static Proxy proxy=null;
 	
@@ -49,7 +49,7 @@ public abstract class AbstractSpider implements Runnable{
 		return regex_map_360;
 	}
 	/**
-	 * 获取指定url的网银内容
+	 * 获取指定url的网页内容
 	 * @param url 需要获取内容的网址
 	 * @return 网址的字符串内容
 	 */
