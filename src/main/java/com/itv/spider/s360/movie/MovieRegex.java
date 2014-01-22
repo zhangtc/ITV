@@ -115,7 +115,8 @@ public class MovieRegex {
 		MovieBean mb=new MovieBean();
 		if(m.find()){
 			mb.setImgUrl(m.group(1));
-			mb.setName(m.group(2));
+			String name=m.group(2);
+			mb.setName(name.length()>32?name.substring(0,32):name);
 			mb.setDirector(m.group(3));
 			mb.setActor(m.group(4));
 			mb.setArea(m.group(5));
