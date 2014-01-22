@@ -16,10 +16,18 @@ public class MoviePageSpider extends AbstractSpider {
 	private final static Logger log=Logger.getLogger(MoviePageSpider.class);
 	private String url;
 	private String typeName;//电影类别 喜剧
-
+	/**
+	 * 构造函数
+	 * @param url 需要解析的url地址
+	 */
 	public MoviePageSpider(String url) {
 		this.url = url;
 	}
+	/**
+	 * 构造函数
+	 * @param url 需要解析的url地址
+	 * @param typeName 视频类型 此页面上的视频都是该类型
+	 */
 	public MoviePageSpider(String url,String typeName){
 		this(url);
 		this.typeName=typeName;
@@ -45,10 +53,5 @@ public class MoviePageSpider extends AbstractSpider {
 				page_info = getPageInfo(downPage);
 			}
 		} while (downPage != null);
-	}
-
-	public static void main(String[] args) {
-		MoviePageSpider mp = new MoviePageSpider("http://v.360.cn/dianying/list.php?cat=101","伦理");
-		mp.run();
 	}
 }

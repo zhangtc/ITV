@@ -1,6 +1,5 @@
 package com.itv.spider.s360.movie;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +12,6 @@ import org.apache.log4j.Logger;
 import com.itv.spider.AbstractSpider;
 import com.itv.spider.bean.MovieBean;
 import com.itv.spider.bean.MovieFocusMap;
-import com.itv.spider.util.FileReadUtil;
 import com.itv.spider.util.RandomId;
 import com.itv.spider.util.URLUtil;
 

@@ -24,13 +24,13 @@ public abstract class AbstractSpider implements Runnable{
 	/**
 	 * 阻塞队列用于存放movie对象便于批量插入数据库
 	 */
-	protected static final BlockingQueue<MovieBean> movieQueue=new LinkedBlockingQueue<MovieBean>(2000);
+	protected static final BlockingQueue<MovieBean> movieQueue=new LinkedBlockingQueue<MovieBean>(2048);
 	/**
 	 * 提供爬取页面的线程池
 	 */
-	public final static ExecutorService spiderPool = Executors.newFixedThreadPool(20,new MovieThreadFactory());//,new MovieThreadFactory()
+	public final static ExecutorService spiderPool = Executors.newFixedThreadPool(20,new MovieThreadFactory());
 	private static Map<String, String> regex_map_360;
-	protected static Proxy proxy=null;
+	protected static Proxy proxy=null;//http 代理类
 	
 	/**
 	 * 获取正则表达式

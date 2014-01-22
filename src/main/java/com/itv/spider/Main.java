@@ -1,7 +1,5 @@
 package com.itv.spider;
 
-import java.util.concurrent.ThreadPoolExecutor;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -10,7 +8,7 @@ import com.itv.spider.service.MovieService;
 
 /**
  * 启动类
- * @author xiajun
+ * @author xiajun	
  *
  */
 public class Main {
