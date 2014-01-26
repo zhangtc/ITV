@@ -186,12 +186,14 @@ public class MovieRegex {
         mb.setSupplies(getSupplies(pageInfo, mb));
         mb.setSupplierUrl(url);
         Map<String, Integer> tmap = MovieUtil.getInstance().getMovieTypeMap();
+        List<Integer> li=new ArrayList<Integer>();
         if (tmap != null && typeName != null) {
             int tid=tmap.get(typeName.trim());
-            List<Integer> li=new ArrayList<Integer>();
             li.add(tid);
-            mb.setTypeName(li);
+        }else{
+            li.add(0);
         }
+        mb.setTypeName(li);
         //mb.setTypeName(typeName);
         log.debug("正则时间：" + (System.nanoTime() - st) / 1000000 + " 毫秒.");
         return mb;
