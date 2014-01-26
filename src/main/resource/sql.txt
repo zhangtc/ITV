@@ -1,3 +1,0 @@
-create table tmp as select id from movie where `timestamp` > '2014-01-22' and supplierUrl in (select supplierUrl from movie group by supplierUrl HAVING count(supplierUrl)>1);
-delete from movie where id in (select id from tmp);
-drop table tmp;
