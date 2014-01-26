@@ -1,10 +1,10 @@
 package com.itv.spider;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.itv.spider.s360.movie.MovieIndexSpider;
 import com.itv.spider.service.MovieService;
+import com.itv.spider.util.MovieUtil;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * 启动类
@@ -19,8 +19,10 @@ public class Main {
 		movieService=(MovieService) ac.getBean("movieService");
 	}
 	public static void main(String[] args) {
+        MovieUtil.getInstance().setMovieService(movieService);
 		MovieIndexSpider movieIndexSpider=(MovieIndexSpider)ac.getBean("movieIndexSpider");
 		AbstractSpider.spiderPool.execute(movieIndexSpider);
 		movieService.run();
+
 	}
 }

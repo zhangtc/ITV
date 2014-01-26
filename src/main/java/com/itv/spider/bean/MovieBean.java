@@ -2,6 +2,9 @@ package com.itv.spider.bean;
 
 import com.itv.spider.util.RandomId;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * 电影信息
  * 
@@ -11,7 +14,7 @@ import com.itv.spider.util.RandomId;
 public class MovieBean {
 	private String id;// 主键id
 	private String name;// 影视名称
-	private String typeName;//电影类型 喜剧
+    private List<Integer> typeName;//电影类型 喜剧
 	private String director;// 导演
 	private String actor;// 主演
 	private String area;// 地区
@@ -27,6 +30,7 @@ public class MovieBean {
 	private int suppliesCount;//第三方资源数
 	private String supplierUrl;//本网页的url
 	private String downUrl;//下载地址
+    private Date timestamp;
 	public MovieBean() {
 		this.id = RandomId.getRandomId();
 	}
@@ -51,7 +55,18 @@ public class MovieBean {
 		}
 	}
 
-	public String getActor() {
+    public Date getTimestamp() {
+        if(timestamp==null){
+            timestamp=new Date();
+        }
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getActor() {
 		return actor;
 	}
 
@@ -159,14 +174,6 @@ public class MovieBean {
 		this.supplierUrl = supplierUrl;
 	}
 
-	public String getTypeName() {
-		return typeName;
-	}
-
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
-	}
-
 	public String getDownUrl() {
 		return downUrl;
 	}
@@ -174,7 +181,13 @@ public class MovieBean {
 	public void setDownUrl(String downUrl) {
 		this.downUrl = downUrl;
 	}
+    public List<Integer> getTypeName() {
+        return typeName;
+    }
 
+    public void setTypeName(List<Integer> typeName) {
+        this.typeName = typeName;
+    }
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("影视名称：");

@@ -24,7 +24,7 @@ public abstract class AbstractSpider implements Runnable{
 	/**
 	 * 阻塞队列用于存放movie对象便于批量插入数据库
 	 */
-	protected static final BlockingQueue<MovieBean> movieQueue=new LinkedBlockingQueue<MovieBean>(2048);
+	protected static final BlockingQueue<MovieBean> movieQueue=new LinkedBlockingQueue<MovieBean>(20480);
 	/**
 	 * 提供爬取页面的线程池
 	 */

@@ -1,11 +1,14 @@
 package com.itv.spider.dao;
 
+import com.itv.spider.bean.MovieType;
 import org.apache.log4j.Logger;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
+
+import java.util.List;
+
 /**
  * 数据库的基础操作
  * @author xiajun
- *
  * @param <T>
  */
 public class BaseDao<T> extends SqlSessionDaoSupport implements IBaseDao{
@@ -24,8 +27,12 @@ public class BaseDao<T> extends SqlSessionDaoSupport implements IBaseDao{
 		}
 		return 0;
 	}
-	public T find(){
-		
-		return null;
+
+    /**
+     * 查询movieType表中的电影类型
+     * @return
+     */
+	public List<MovieType> findMovieType(){
+		return getSqlSession().selectList("com.itv.sprider.movie.findMovieType");
 	}
 }

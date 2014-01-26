@@ -1,23 +1,24 @@
 package com.itv.spider.util;
 
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * 根据系统时间和随机数生成随机id
- * @author xiajun
  *
+ * @author xiajun
  */
 public class RandomId {
-	private static Random r = new Random();
-	public static String getRandomId() {
-		int r_1=0;
-		long time=0;
-		int r_2=0;
-		synchronized (r) {
-			time = System.currentTimeMillis();
-			r_1 = r.nextInt(1000);
-			r_2=r.nextInt(100);
-		}
-		String ss = r_2+""+time + "" + r_1;
-		return Long.toHexString(Long.valueOf(ss));
-	}
+    private static Random r = new Random();
+    static AtomicInteger atomic = new AtomicInteger(1);
+
+    public static String getRandomId() {
+        long time = System.currentTimeMillis();
+        String ss = time+""+atomic.incrementAndGet();
+        return Long.toHexString(Long.valueOf(ss));
+    }
+
+    public static void main(String[] args) {
+        System.out.println(RandomId.getRandomId());
+    }
 }

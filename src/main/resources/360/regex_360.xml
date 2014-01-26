@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spider id="360">
+	<regex name="movie_index_type_div"><![CDATA[<div[^>]+?class=["']bd["']>([^}]+?)全部]]></regex>
+	<regex name="movie_index_type_a"><![CDATA[<a[^>]+?href=["']([^"']+?)["'][^}]*?>(.*?)</a>]]></regex>
+	<regex name="movie_page_list_url"><![CDATA[<div\s+class=["']pic["']>.*?<a[^>]+?href=["']([^>]+?)["']]]></regex>
+	<regex name="movie_page_down_url"><![CDATA[<div[^>]+?class=["']gpage["'].*?<a[^>]+?class=["']selected["'](?:(?!</div>).)+?<a[^>]+?href=["']([^"']+?)["']]]></regex>
+	<regex name="movie_info"><![CDATA[<a[^>]+?class=["']pic\sle-playico["'][^}]+?<img[^>]src=["']([^"']+?)["'][^}]+?<h1[^>]+?id=["']film_name["'][^>]+?>([^<]+?)<[^}]+?<dt>导演[^}]+?<a[^>]+?>([^<]+?)</a>[^}]+?主演：([^}]+?)</dd>[^}]+?地区.*?<dd>(.*?)</dd>[^}]+?年代.*?<dd>([^<]*?)</dd>[^}]+?片长.*?<dd>([^<]*?)</dd>[^}]+?<p[^>]+?class=["']value["']>.*?<em>(.*?)</em>([^<]*?)</span>[^}]+?<div[^>]+?>\(([^>]+?)人[^}]+?<p\s+?class=["']less["']>([^<]*?)<]]></regex>
+	<regex name="movie_get_actor"><![CDATA[<a[^>]+?>([^<]+?)</a>]]></regex>
+	<regex name="movie_info2"><![CDATA[<a[^>]+?class=["']pic\sle-playico["'][^}]+?<img[^>]src=["']([^"']+?)["'][^}]+?<h1[^>]+?id=["']film_name["'][^>]+?>([^<]+?)<[^}]+?</span>(.*?)上映[^}]+?<dt>导演[^}]+?<a[^>]+?>([^<]+?)</a>[^}]+?地区.*?<dd>(.*?)</dd>[^}]+?片长.*?<dd>([^<]+?)</dd>[^}]+?主演([^}]+?)</dd>[^}]+?<p\s+?class=["']less["']>([^<]+?)<[^}]+?<p[^>]+?class=["']value["']>.*?<em>(.*?)</em>([^<]*?)</span>[^}]+?<div[^>]+?>\(([^>]+?)人]]></regex>
+
+<regex name="movie_info3"><![CDATA[<a[^>]+?class=["']pic\sle-playico["'][^}]+?<img[^>]src=["']([^"']+?)["'][^}]+?<h1[^>]+?id=["']film_name["'][^>]+?>([^<]+?)<[^}]+?</span>(.*?)上映[^}]+?<dt>导演[^}]+?<a[^>]+?>([^<]+?)</a>[^}]+?语言[^}]+?<dd>([^<]*?)</dd>[^}]+?地区.*?<dd>(.*?)</dd>[^}]+?片长.*?<dd>([^<]+?)</dd>[^}]+?主演([^}]+?)</dd>[^}]+?<p\s+?class=["']less["']>([^<]+?)<[^}]+?<p[^>]+?class=["']value["']>.*?<em>(.*?)</em>([^<]*?)</span>[^}]+?<div[^>]+?>\(([^>]+?)人]]></regex>
+
+	<regex name="movie_get_supplies1"><![CDATA[testSpeed\.test\((.*?)\)]]></regex>
+	<regex name="movie_get_supplies2"><![CDATA[<li[^>]+?data-speed=["']slow["']><a[^>]+?href=["']([^"']+?)["'][^}]+?<em>(.*?)</em>]]></regex>
+	<regex name="movie_get_supplies_info"><![CDATA[["']name["']:["']([^"']*?)["'].*?link["']:["']([^"']*?)["']]]></regex>
+
+	<regex name="movie_focus_map_bigimg"><![CDATA[<li[^>]+?class=["']focus-item["']>[^a-z]*?<a[^>]+?href=["']([^"']+?)["'][^>]+?>[^a-z]*?<img[^>]+?src=["']([^"']+?)["']]]></regex>
+    <regex name="movie_focus_map_text_div"><![CDATA[<div[^>]+?class=["']focus-title["']>([^}]+?)</div>]]></regex>
+	<regex name="movie_focus_map_text"><![CDATA[<em[^>]+?class=["']title["']>([^<]+?)</em>[^}]*?\s?([^}]+?)</a>]]></regex>
+	<regex name="movie_focus_map_miniimg_div"><![CDATA[<ul[^>]+?id=["']focus-num["']([^}]+?)</ul>]]></regex>
+	<regex name="movie_focus_map_miniimg"><![CDATA[<img[^>]+?src=["']([^"']+?)["']]]></regex>
+
+	<regex name="movie_hot_play_div"><![CDATA[<div[^>]+?id=["']hot-recommend["'][^}]+?<ul[^>]+?class=["']figure-list\sclearfix["']([^}]+?)</ul>]]></regex>
+	<regex name="movie_hot_play"><![CDATA[<a[^>]+?href=["']([^"']+?)["'][^}]+?<img[^>]+?data-src=["']([^"']+?)["'][^}]+?<a[^>]+?>(.*?)</a>[^}]+?<p>(.*?)</p>]]></regex>
+
+	<regex name="movie_first_play_div"><![CDATA[<div[^>]+?id=["']net-first["'][^}]+?<ul[^>]+?class=["']figure-list\sclearfix["']([^}]+?)</ul>]]></regex>
+	<regex name="movie_first_play"><![CDATA[<a[^>]+?href=["']([^"']+?)["'][^}]+?<img[^>]+?data-src=["']([^"']+?)["'][^}]+?<a[^>]+?>(.*?)</a>[^}]+?<p>(.*?)</p>]]></regex>
+
+	<regex name="movie_preview_play_div"><![CDATA[<div[^>]+?id=["']slider-wrap-inner-middle["'][^}]+?<ul[^>]+?class=["']herald\sgclearfix["']([^}]+?)</ul>]]></regex>
+    <regex name="movie_preview_play"><![CDATA[<a[^>]+?href=["']([^"']+?)["'][^}]+?<img[^>]+?src=["']([^"']+?)["'][^}]+?<a[^>]+?>([^<]+?)</a>]]></regex>
+
+	<regex name="movie_easy_play_div"><![CDATA[<div[^>]+?id=["']easy["']([^}]+?)<div[^>]+?id=["']easy-top["']]]></regex>
+    <regex name="movie_easy_play"><![CDATA[<li>[^}]+?<div[^>]+class=["']pic["']>[^}]+?<img[^>]+?data-src=["']([^"']+?)["'][^}]+?<div[^>]+?class=["']cont["'][^}]+?<a[^>]+?href=["']([^"']+?)["'][^>]*?>(.*?)</a>[^}]+?<p>(.*?)</p>]]></regex>
+
+    <regex name="movie_passion_play_div"><![CDATA[<div[^>]+?id=["']passion["']([^}]+?)<div[^>]+?id=["']passion-top["']]]></regex>
+	<regex name="movie_passion_play"><![CDATA[<li>[^}]+?<div[^>]+class=["']pic["']>[^}]+?<img[^>]+?data-src=["']([^"']+?)["'][^}]+?<div[^>]+?class=["']cont["'][^}]+?<a[^>]+?href=["']([^"']+?)["'][^>]*?>(.*?)</a>[^}]+?<p>(.*?)</p>]]></regex>
+
+	<regex name="movie_hot_top_div"><![CDATA[<div[^>]+?id=["']hotsearch-top["']([^}]+?)</ol>[^}]*?</div>]]></regex>
+	<regex name="movie_hot_top"><![CDATA[<div[^>]+?class=["']name["'][^}]+?<a[^>]+?href=["']([^"']+?)["'][^>]+?>(.*?)</a>]]></regex>
+
+
+
+
+	<regex name="movie_easy_top_div"><![CDATA[<div[^>]+?id=["']easy-top["']([^}]+?)<div[^>]+?id=["']passion["']]]></regex>
+	<regex name="movie_easy_top"><![CDATA[<li[^>]+?class=["'](?:top-three)?\s*clearfix["'][^}]*?<a[^>]+?href=["']([^"']+?)["'][^}]+?</span>\s*([^}]+?)<span[^>]+?class=["']grade]]></regex>
+
+	<regex name="movie_passion_top_div"><![CDATA[<div[^>]+?id=["']passion-top["']([^}]+?)<div[^>]+?id=["']plan["']]]></regex>
+	<regex name="movie_passion_top"><![CDATA[<li[^>]+?class=["'](?:top-three)?\s*clearfix["'][^}]*?<a[^>]+?href=["']([^"']+?)["'][^}]+?</span>\s*([^}]+?)<span[^>]+?class=["']grade]]></regex>
+</spider>
